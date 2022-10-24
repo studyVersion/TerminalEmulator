@@ -10,9 +10,8 @@ public class Main {
 	// static String nombreFichero = "";
 
 	public static String extractoRuta(String valor) {
-		String ruta = "C:\\Users\\Administrateur\\Desktop\\";
-
 		String[] valorSplit = valor.toLowerCase().split("\\s");
+		String ruta = "C:\\Users\\Administrateur\\Desktop\\";
 
 		if (valorSplit[0].equals("ls")) {
 			paso = 1;
@@ -27,9 +26,7 @@ public class Main {
 					ruta = valorSplit[1];
 				}
 			}
-		}
-
-		else if (valorSplit[0].equals("mkdir")) {
+		} else if (valorSplit[0].equals("mkdir")) {
 			paso = 3;
 			ruta = valorSplit[1];
 
@@ -53,7 +50,7 @@ public class Main {
 		String ruta = "";
 
 		while (true) {
-			System.out.println("root@root:/Users$");
+			System.out.println("root@root:~/Desktop$");
 			option = sc.nextLine();
 			String[] optionSplit = option.split("\\s");
 			ruta = extractoRuta(option);
@@ -65,26 +62,29 @@ public class Main {
 			}
 
 			badre = new Terminal(ruta);
-
+			int mensajeConsola = 0;
 			if (paso == 1) {
 				System.out.println(badre.lsCommando());
 			} else if (paso == 2) {
 				System.out.println(badre.lsDetallesCommando());
 			} else if (paso == 3) {
-				int codigo = badre.mkdirComando();
-				if (codigo == -1) {
+				mensajeConsola = badre.mkdirComando();
+				if (mensajeConsola == -1) {
 					System.out.println("Bash " + ruta + ": No hay tal archivo o directorio");
 				}
 			} else if (paso == 4) {
-				paso = badre.catComando();
-				if (paso == -1) {
+				mensajeConsola = badre.catComando();
+				if (mensajeConsola == -1) {
 					System.out.println("Bash " + ruta + ": No hay tal archivo o directorio");
 				}
 			} else if (paso == 5) {
-				paso = badre.rmComando();
-				if (paso == -1) {
+				mensajeConsola = badre.rmComando();
+				if (mensajeConsola == -1) {
 					System.out.println("Bash " + ruta + ": No hay tal archivo o directorio");
 				}
+			} else {
+				System.out.println("Comando '" + optionSplit[0] + "' no encontrado, intente sudo apt install <"
+						+ optionSplit[0] + ">");
 			}
 
 		}
