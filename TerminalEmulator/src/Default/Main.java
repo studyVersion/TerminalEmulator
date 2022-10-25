@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-	public static int paso = 0; // navegar los comandos 1 para ls ; 2 para ls -l ; 3 para Mkdir ; 4 para cat ; 5
-								// para rm
-	// static String nombreFichero = "";
+	public static int paso = 0; // navegar los comandos 1 para ls ; 2 para ls -l ; 3 para Mkdir ; 4 para cat ; 5 para rm
+	
 
 	public static String extractoRuta(String valor) {
 		String[] valorSplit = valor.toLowerCase().split("\\s");
@@ -48,21 +47,24 @@ public class Main {
 		Terminal badre = null;
 		String option = "";
 		String ruta = "";
+		int mensajeConsola = 0;
 
 		while (true) {
 			System.out.println("root@root:~/Desktop$");
 			option = sc.nextLine();
 			String[] optionSplit = option.split("\\s");
+			
 			ruta = extractoRuta(option);
-
+			
+            // para si el usuario no escribe la ruta
 			if (!ruta.equals("C:\\Users\\Administrateur\\Desktop\\")) {
 				if (!ruta.contains("\\")) {
 					ruta = "C:\\Users\\Administrateur\\Desktop\\" + optionSplit[optionSplit.length - 1];
 				}
 			}
 
-			badre = new Terminal(ruta);
-			int mensajeConsola = 0;
+			badre = new Terminal(ruta); 
+		
 			if (paso == 1) {
 				System.out.println(badre.lsCommando());
 			} else if (paso == 2) {

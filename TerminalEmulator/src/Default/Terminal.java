@@ -13,7 +13,6 @@ public class Terminal {
 	private String ruta;
 	private String[] filesName;
 	private File manegarFile;
-	//private static int codigo;
 
 	public Terminal(String ruta) {	
 		this.manegarFile = new File(ruta);
